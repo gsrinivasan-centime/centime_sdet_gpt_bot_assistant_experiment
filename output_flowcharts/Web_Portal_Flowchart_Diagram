@@ -1,0 +1,284 @@
+// Centime Web Portal Flow
+digraph {
+	Login [label="Login Page
+(Email ID, Password)"]
+	Forgot [label="Forgot Password Page
+(Email ID input)"]
+	Dashboard [label="Dashboard
+(Banking, Forecasting, KPIs, Receivables, Payables, Risk & Reputation)"]
+	Banking [label="Banking
+Dashboard"]
+	Forecasting [label="CashFlowForecast
+Dashboard"]
+	KPIs [label="KPIs
+Dashboard"]
+	Receivables [label="AR
+Dashboard"]
+	Payables [label="AP
+Dashboard"]
+	"Risk & Reputation" [label="RnR
+Dashboard"]
+	Login -> Dashboard [label="Login Success"]
+	Login -> Forgot [label="Forgot Password"]
+	Dashboard -> Banking [label="Select Banking"]
+	Dashboard -> Forecasting [label="Select Forecasting"]
+	Dashboard -> KPIs [label="Select KPIs"]
+	Dashboard -> Receivables [label="Select Receivables"]
+	Dashboard -> Payables [label="Select Payables"]
+	Dashboard -> "Risk & Reputation" [label="Select Risk & Reputation"]
+	"Suppliers Tab" [label="Suppliers Tab
+ List of suppliers 
+having atleast one 
+outstanding invoice"]
+	"Documents Tab" [label="Documents Tab"]
+	"Unpaid Invoices Tab" [label="Unpaid invoices Tab
+ List of invoices 
+to be paid to suppliers"]
+	"Paid Invoices Tab" [label="Paid invoices Tab
+ List of invoices 
+ paid to suppliers"]
+	Payables -> "Suppliers Tab" [label="Select Suppliers tab"]
+	Payables -> "Documents Tab" [label="Select Documents tab"]
+	Payables -> "Unpaid Invoices Tab" [label="Select Unpaid Invoices tab"]
+	Payables -> "Paid Invoices Tab" [label="Select Paid Invoices tab"]
+	subgraph Tabs {
+		node [color=white shape=box style=filled]
+		color=lightgrey style=filled
+		"Suppliers Tab"
+		"Documents Tab"
+		"Unpaid Invoices Tab"
+		"Paid Invoices Tab"
+		label=Tabs
+	}
+	"No Action" [label="No Action tab
+ List of unpaid invoices
+ in read only mode"]
+	"Edit Action" [label="Edit Action tab
+ List of unpaid invoices
+ with status user action needed,
+ In process, Scheduled, 
+ Ready to Pay, Awaiting approval,
+ Rejected and Failed status
+ in read only mode"]
+	"Pay Action" [label="Pay Action tab
+ List of unpaid invoices
+ with Ready to Pay
+ and 
+Ready to pay with an amber alert status"]
+	"Approve Action" [label="Approve Action tab
+ List of unpaid invoices
+ in Awaiting approval status"]
+	"Reject Action" [label="Reject Action tab
+ List of unpaid invoices
+ in Awaiting approval status"]
+	"Recall Action" [label="Recall Action tab
+ List of unpaid invoices
+ in Scheduled status"]
+	"Mark Paid Action" [label="Mark paid Action tab
+ List of unpaid invoices
+ with Ready to Pay status
+ and 
+ payment method as FX Payment"]
+	"Unpaid Invoices Tab" -> "No Action" [label="Select No Action tab"]
+	"Unpaid Invoices Tab" -> "Edit Action" [label="Select Edit Action tab"]
+	"Unpaid Invoices Tab" -> "Pay Action" [label="Select Pay Action tab"]
+	"Unpaid Invoices Tab" -> "Approve Action" [label="Select Approve Action tab"]
+	"Unpaid Invoices Tab" -> "Reject Action" [label="Select Reject Action tab"]
+	"Unpaid Invoices Tab" -> "Recall Action" [label="Select Recall Action tab"]
+	"Unpaid Invoices Tab" -> "Mark Paid Action" [label="Select Mark Paid Action tab"]
+	"No Action Tab Table" [label="No Action Tab Table
+Table containing
+ list of unpaid invoices with
+ all fields in read only mode"]
+	"No Action Tab Table Supplier Column" [label="No Action Tab Table Supplier Column
+Column with supplier Name
+ with hyperlink to supplier side panel"]
+	"Supplier Profile" [label="Supplier Profile
+ A side panel that opens on
+ clicking on any supplier name
+ in table 'Supplier' column. " shape=box]
+	Profile [label="Profile
+ supplier profile"]
+	Payments [label="Payments
+Payment methods available
+ to pay invoice amounts
+ to supplier"]
+	History [label="History
+Audit trail of 
+all update activity
+ carried out on supplier panel"]
+	Notes [label="Notes
+Any special notes
+ to store related to supplier"]
+	"No Action" -> "No Action Tab Table"
+	"No Action Tab Table" -> "Supplier Profile"
+	"Supplier Profile" -> Profile
+	"Supplier Profile" -> Payments
+	"Supplier Profile" -> History
+	"Supplier Profile" -> Notes
+	Address [label="Address
+Editable Supplier Contact information
+ Address, Phone number,
+website, Type and Tax ID"]
+	"Primary contact" [label="Primary contact
+Editable Supplier Contact information
+ Name, Phone Number, Email Id"]
+	"Document Capture" [label="Document Capture
+Editable Supplier setting
+ Aggregate invoice lines into one Yes/No"]
+	"Supplier email communications" [label="Supplier email communications
+Editable option to send notification when payment is scheduled
+          Send remittance when payment is sent
+ supplier prtal contact email id"]
+	"Supplier portal contact" [label="Supplier Portal secondary contact"]
+	Name [label="Supplier Primary contact Name"]
+	Email [label="Supplier Primary contact Email"]
+	"Enter Name" [label="Supplier Portal Secondary contact Name"]
+	"Enter Email" [label="Supplier Portal Secondary contact Email"]
+	Profile -> Address
+	Profile -> "Primary contact"
+	Profile -> "Document Capture"
+	Profile -> "Supplier email communications"
+	"Primary contact" -> Name
+	"Primary contact" -> "Phone number"
+	"Primary contact" -> Email
+	"Document Capture" -> "Aggregate invoice lines into one Yes/No"
+	"Supplier email communications" -> "Send notification when payment is scheduled Yes/No"
+	"Supplier email communications" -> "Send remittance when payment is sent Yes/No"
+	"Supplier email communications" -> "Supplier portal contact"
+	"Supplier portal contact" -> "Enter Name"
+	"Supplier portal contact" -> "Enter Email"
+	"Payment terms" [label="Payment terms
+Default supplier payment terms obtained from QBO GL"]
+	Currency [label="Currency
+Default supplier currency obtained from QBO GL"]
+	"Supplier Portal" [label="Supplier Portal
+Supplier portal web address created by centime"]
+	"Payment Methods" [label="Payment Methods
+Available supplier payment methods
+ Radio button options to select
+ Credit Card, ACH, Check, Other and None"]
+	"Credit Card" [label="Credit Card
+Pay using Credit Card"]
+	"Pay from account - Credit Card" [label="Pay from account (pfa)
+dropdown to select funding card accounts 
+eg. Credit Card, Centime Credit Card or Amex Credit Card"]
+	"Select pfa as Credit Card" [label="Pfa as Credit Card"]
+	"Select pfa as Centime Credit Card or Amex Card" [label="Pfa as Centime Credit Card or Amex Card"]
+	"Card Delivery" [label="Card Delivery
+Radio button options
+ to share virtual card number(VCN) details
+ through email or on supplier portal"]
+	"By Email" [label="By Email
+ Radio button option"]
+	"We will pay on the supplier website" [label="We will pay on the supplier website
+ Radio button option"]
+	"VCN delivery Name" [label="Name
+Name of the person
+ to whom the
+ VCN details are shared"]
+	"VCN delivery Email" [label="Email
+EmailId of the person
+ to whom the
+ VCN details are shared"]
+	"Supplier website address" [label="Suppliers website address"]
+	"Payment Limit" [label="Payment Limit
+Payment Limit of Credit Card"]
+	Surcharge [label="Surcharge in %
+Surcharge amount charged 
+by the Credit card company
+ for transaction
+ client has to pay inclusive of 
+surcharge amount while making invoice amount"]
+	Payments -> "Payment terms"
+	Payments -> Currency
+	Payments -> "Supplier Portal"
+	Payments -> "Payment Methods"
+	"Payment Methods" -> "Credit Card"
+	"Credit Card" -> "Pay from account - Credit Card"
+	"Pay from account - Credit Card" -> "Select pfa as Credit Card"
+	"Pay from account - Credit Card" -> "Select pfa as Centime Credit Card or Amex Card"
+	"Select pfa as Centime Credit Card or Amex Card" -> "Card Delivery"
+	"Select pfa as Centime Credit Card or Amex Card" -> "Payment Limit"
+	"Select pfa as Centime Credit Card or Amex Card" -> Surcharge
+	"Card Delivery" -> "By Email"
+	"By Email" -> "VCN delivery Name"
+	"By Email" -> "VCN delivery Email"
+	"Card Delivery" -> "We will pay on the supplier website"
+	"We will pay on the supplier website" -> "Supplier website address"
+	"Select pfa as Credit Card" -> "Payment Limit"
+	"Select pfa as Credit Card" -> Surcharge
+	"Select pfa as Credit Card" -> "Supplier website address"
+	ACH [label="ACH payment method
+ This method is used for
+bank to bank to money transfer"]
+	"Pay from account - ACH" [label="Pay from account
+Dropdown to select funding bank account eg. Checking or Saving account"]
+	"Pay to Account - ACH" [label="Pay to Account
+ Ready only message with status
+of supplier bank account validation eg. 'Valid account', 'Invalid Account' 
+and 'Account Validation In Progress'"]
+	"Routing Number" [label="Supplier Bank Routing Number
+Input field for Supplier Bank Routing Number"]
+	"Bank Name" [label="Bank Name
+After entering Routing number,
+the Bank name is immediately fetched and shown by centime"]
+	"Account Number" [label="Supplier Bank Account Number
+Input field for Supplier Bank Account Number"]
+	"Re-enter Account Number" [label="Supplier Bank Account Number
+Input field for Reentering Supplier Bank Account Number"]
+	"Group ACH Payments" [label="Group payments made on same payment date
+Toggle switch to enable or
+ disable group payments"]
+	"Payment Methods" -> ACH
+	ACH -> "Pay from account - ACH"
+	ACH -> "Pay to Account - ACH"
+	"Pay to Account - ACH" -> "Routing Number"
+	"Pay to Account - ACH" -> "Bank Name"
+	"Pay to Account - ACH" -> "Account Number"
+	"Pay to Account - ACH" -> "Re-enter Account Number"
+	ACH -> "Group ACH Payments"
+	Check [label="Check payment method
+ This method is used for
+paying invoice amounts through printed Checks"]
+	"Pay from account - Check" [label="Pay from account
+Dropdown to select funding bank account eg. Checking or Saving account"]
+	"Pay to Account - Check" [label="Pay to Account"]
+	"Name on Check" [label="Name on Check
+Input field for Name to be printed on Check"]
+	"Mailing Address" [label="Mailing Address
+Checkbox with Input field
+ if supplier prefers to recieve the 
+check to a different mailing address"]
+	"Group Check Payments" [label="Group payments made on same payment date
+Toggle switch to enable or
+ disable group payments"]
+	"Payment Methods" -> Check
+	Check -> "Pay from account - Check"
+	Check -> "Pay to Account - Check"
+	"Pay to Account - Check" -> "Name on Check"
+	"Pay to Account - Check" -> "Mailing Address"
+	Check -> "Group Check Payments"
+	Other [label="Other
+Payments made outside of centime
+ can be marked paid using
+ these payment methods"]
+	"Pay from account - Other" [label="Pay from account
+Dropdown to select funding bank account eg. Amazon Savings account, Pay Pal etc."]
+	"Payment Methods" -> Other
+	Other -> "Pay from account - Other"
+	"None Specified" [label="None Specified
+ If no accounts are fetched from GL, this option is default"]
+	"Payment Methods" -> "None Specified"
+	"Supplier History" [label="Supplier History
+ Paginated audit trail
+of all actions made in the
+ supplier side panel.
+Contains Date, Action and Action Description"]
+	"Supplier Profile" -> "Supplier History"
+	Notes [label="Notes
+Supplier Notes can be stored here"]
+	"Add Notes" [label="Add Notes
+ Input field to add notes"]
+	"Notes Audit Trail" [label="Paginated Audit Trail of notes with date and notes"]
+}

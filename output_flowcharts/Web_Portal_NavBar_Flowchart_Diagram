@@ -1,0 +1,61 @@
+// Centime Web Portal NavBar Flow
+digraph {
+	Login [label="Login Page
+(Email ID, Password)"]
+	Forgot [label="Forgot Password Page
+(Email ID input)"]
+	Dashboard [label="Dashboard
+(Banking, Forecasting, KPIs, Receivables, Payables, Risk & Reputation)"]
+	NavBar [label="NavBar
+ quick access buttons such as Centime Logo for home page, Buisness Entity selecting dropdown, 
+Settings, Notifications, 
+GL sync status and controls, Centime Products, 
+Easy access button for navigating
+ between modules such AP, AR, RnR etc"]
+	"Centime Logo" [label="Centime Logo
+ Centime logo button in nav bar"]
+	"Buisness Entity" [label="Buisness Entity
+ Buisness entity dropdown to select
+ other buisness entities of client 
+ on selecting this entity, by default
+ the dashboard of selected entity is opened"]
+	Settings [label="Settings
+Gear button in nav bar"]
+	Notifications [label="Notifications
+ Bell icon in nav bar"]
+	"GL Sync" [label="GL Sync
+ circular icon in nav bar to see
+ the GL sync status and initiate manual GL sync"]
+	"Easy access" [label="Easy access
+ Flower shaped button in navbar to navigate between
+ Banking, Forecasting, KPIs, Receivables, Payables, Risk & Reputation modules
+ without visiting dashboard page"]
+	Login -> Dashboard [label="Login Success"]
+	Login -> Forgot [label="Forgot Password"]
+	Dashboard -> NavBar
+	NavBar -> "Centime Logo"
+	NavBar -> "Buisness Entity"
+	NavBar -> Settings
+	NavBar -> Notifications
+	NavBar -> "GL Sync"
+	NavBar -> "Easy access"
+	"Centime Logo" -> Dashboard [label="Click on centime logo"]
+	"Buisness Entity" -> Dashboard
+	"My Profile" [label="My Profile
+ Account User profile details"]
+	"Personal details" [label="Personal details
+ Editable account user details 
+First name, last name, Email and Job title"]
+	"Edit phone number" [label="Edit phone number
+ Editable section for Mobile number of user"]
+	"Edit password" [label="Edit password
+ Editable section to update password of user"]
+	"Edit timeout preference" [label="Edit timeout preference
+ Editable section to update idle time (in minutes) of user accout
+ The mentioned time will ensure logout after the idle time"]
+	Settings -> "My Profile"
+	"My Profile" -> "Personal details"
+	"My Profile" -> "Edit phone number"
+	"My Profile" -> "Edit password"
+	"My Profile" -> "Edit timeout preference"
+}
